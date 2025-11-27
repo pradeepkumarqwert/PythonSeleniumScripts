@@ -2,20 +2,24 @@ from appium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from appium.options.android import UiAutomator2Options
 import time
 import os
 
-caps = {
-    "deviceName": "Vivo V40 Pro",
-    "platformName": "Android",
-    "platformVersion": "14",
-    "app": "General-Store-final (1).apk"
-}
 
-server_url = "https://cloud.fireflink.com/backend/fireflinkcloud/wd/hub?accessKey=aeedf5e8-d698-4876-9ab0-aeab6a084b86&licenseId=LIC1026493&projectName=Project+for+Demo/"
+options = UiAutomator2Options()
+options.device_name = "OnePlus Nord CE 2 Lite 5G"
+options.platform_name = "Android"
+options.platform_version = "14"
+options.browser_name = "Chrome"
+options.automation_name = "UiAutomator2"
+device_farm_hub_url = "https://fireflinkclouddev.fireflink.com/backend/fireflinkcloud/wd/hub?accessKey=357782b4-a55a-46a3-9eef-4d0e3db10941&licenseId=LIC4743&projectName=TestingCaps"
 
-driver = webdriver.Remote(server_url, caps)
+# Use 'desired_capabilities' here
+driver = webdriver.Remote(command_executor=device_farm_hub_url, options=options)
+
 wait = WebDriverWait(driver, 20)
+
 
 def take_screenshot(name):
     path = f"C:\\SimpleRunScreenshots\\{name}.png"
@@ -25,7 +29,9 @@ def take_screenshot(name):
 
 try:
     # Select country
-    country_dropdown = wait.until(EC.element_to_be_clickable((By.XPATH, "//android.widget.Spinner[@resource-id='com.androidsample.generalstore:id/spinnerCountry']")))
+    country_dropdown = wait.until(
+        EC.element_to_be_clickable((By.XPATH, "//android.widget.Spinner[@resource-id='com.androidsample.generalstore:id/spinnerCountry']"))
+    )
     country_dropdown.click()
     take_screenshot("01_CountryDropdown_Click")
     time.sleep(1)
@@ -63,5 +69,6 @@ try:
 except Exception as e:
     print("Exception occurred:", e)
     take_screenshot("99_Exception")
+
 finally:
     driver.quit()

@@ -1,29 +1,41 @@
+import time
+import os
 from appium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
-import os
+from appium.options.ios import XCUITestOptions
 
-caps = {
-    "deviceName": "iPhone 14",
-    "platformName": "iOS",
-    "platformVersion": "18.5",
-    "browserName": "Safari"
-}
+# ------------------------------
+# Fireflink Cloud iOS Safari Setup
+# ------------------------------
+device_farm_hub_url = "https://fireflinkclouddev.fireflink.com/backend/fireflinkcloud/wd/hub?accessKey=357782b4-a55a-46a3-9eef-4d0e3db10941&licenseId=LIC4743&projectName=TestingCaps"
 
-server_url = ""
+# XCUITestOptions for iOS Safari
+options = XCUITestOptions()
+options.device_name = "iPhone 11"
+options.platform_name = "iOS"
+options.platform_version = "15.5"
+options.browser_name = "Safari"
+options.automation_name = "XCUITest"
+# Removed accept_insecure_certs to avoid overlapping keys issue
 
-driver = webdriver.Remote(server_url, caps)
+driver = webdriver.Remote(command_executor=device_farm_hub_url, options=options)
 wait = WebDriverWait(driver, 15)
 
+# ------------------------------
+# Screenshot helper
+# ------------------------------
 def take_screenshot(name):
     path = f"C:\\SimpleRunScreenshots\\{name}.png"
     os.makedirs(os.path.dirname(path), exist_ok=True)
     driver.save_screenshot(path)
     print(f"Screenshot saved: {path}")
 
+# ------------------------------
+# Test Script
+# ------------------------------
 try:
     driver.get("https://www.wikipedia.org/")
     time.sleep(2)

@@ -1,0 +1,74 @@
+Script:
+Chrome:
+        device_farm_hub_url = 'http://103.182.210.84:4444/'
+        options = webdriver.ChromeOptions()
+        options.set_capability('platformName', 'Windows 11')
+        options.set_capability('browserVersion', '133')
+        driver = webdriver.Remote(device_farm_hub_url, options=options)
+        driver.set_window_size(1024, 768)
+
+Firefox:
+        device_farm_hub_url = "https://fireflinkclouddev.fireflink.com/backend/fireflinkcloud/wd/hub?accessKey=xnZJRvKL6F26IuCM3K3pe-oSuykml-D0u6GrTaLLwdaPk9OS80lI6mGP2fYdYGwVuP5kaDO_zcElBor3m_lh2fgDWT7n0MBXfWZ6PBZyKaIdbyyUv-Fymw7NaySl4XENMPmgOpt2z-gR0RrH0gZvuV2JukC_19mVB3sawJ__i-AibN9y9Ae4QmD3P4qcDqbRYln_OMFy6ckvhuRPr6KkACpdUsfm4NsTq1ddoOYxd9RTEfydGwkcDX8GuyAaGtYIm_z6sHUjynycvlhuCbZnNV30Fg9Yp4JidXKK5sIkWQ&licenseId=LIC4639&projectName=Project-03";
+        options = webdriver.FirefoxOptions()
+        options._caps = {}
+        options.set_capability("browserName", "firefox")
+        options.set_capability("platformName", "Windows 10")
+        options.set_capability("browserVersion", "134")
+
+        Note: options._caps = {} because firefox will auto inject the acceptInsecureCerts and fireflink also will do that same so to avoid duplication we needs to pass it
+
+Edge:
+        device_farm_hub_url = "https://fireflinkclouddev.fireflink.com/backend/fireflinkcloud/wd/hub?accessKey=xnZJRvKL6F26IuCM3K3pe-oSuykml-D0u6GrTaLLwdaPk9OS80lI6mGP2fYdYGwVuP5kaDO_zcElBor3m_lh2fgDWT7n0MBXfWZ6PBZyKaIdbyyUv-Fymw7NaySl4XENMPmgOpt2z-gR0RrH0gZvuV2JukC_19mVB3sawJ__i-AibN9y9Ae4QmD3P4qcDqbRYln_OMFy6ckvhuRPr6KkACpdUsfm4NsTq1ddoOYxd9RTEfydGwkcDX8GuyAaGtYIm_z6sHUjynycvlhuCbZnNV30Fg9Yp4JidXKK5sIkWQ&licenseId=LIC4639&projectName=Timezones";
+        options = webdriver.EdgeOptions()
+        options.set_capability('platformName', 'Windows 10')
+        options.set_capability('browserVersion', '134')
+        driver = webdriver.Remote(command_executor=device_farm_hub_url, options=options)
+        driver.set_window_size(1024, 768)
+
+Mobile Browser:
+
+iOS:(Execution reaching hub nut not creation session in hub)
+device_farm_hub_url = "https://fireflinkclouddev.fireflink.com/backend/fireflinkcloud/wd/hub?accessKey=xnZJRvKL6F26IuCM3K3pe-oSuykml-D0u6GrTaLLwdaPk9OS80lI6mGP2fYdYGwVuP5kaDO_zcElBor3m_lh2fgDWT7n0MBXfWZ6PBZyKaIdbyyUv-Fymw7NaySl4XENMPmgOpt2z-gR0RrH0gZvuV2JukC_19mVB3sawJ__i-AibN9y9Ae4QmD3P4qcDqbRYln_OMFy6ckvhuRPr6KkACpdUsfm4NsTq1ddoOYxd9RTEfydGwkcDX8GuyAaGtYIm_z6sHUjynycvlhuCbZnNV30Fg9Yp4JidXKK5sIkWQ&licenseId=LIC4639&projectName=Project-03";
+
+# XCUITestOptions for iOS Safari
+options = XCUITestOptions()
+options.device_name = "iPhone 11"
+options.platform_name = "iOS"
+options.platform_version = "15.5"
+options.browser_name = "Safari"
+options.automation_name = "XCUITest"
+driver = webdriver.Remote(command_executor=device_farm_hub_url, options=options)
+
+android:
+options = UiAutomator2Options()
+options.device_name = "Pixel 7 Pro"
+options.platform_name = "Android"
+options.platform_version = "14"
+options.app = "General-Store-final (1).apk"
+options.automation_name = "UiAutomator2"
+device_farm_hub_url = "https://fireflinkclouddev.fireflink.com/backend/fireflinkcloud/wd/hub?accessKey=xnZJRvKL6F26IuCM3K3pe-oSuykml-D0u6GrTaLLwdaPk9OS80lI6mGP2fYdYGwVuP5kaDO_zcElBor3m_lh2fgDWT7n0MBXfWZ6PBZyKaIdbyyUv-Fymw7NaySl4XENMPmgOpt2z-gR0RrH0gZvuV2JukC_19mVB3sawJ__i-AibN9y9Ae4QmD3P4qcDqbRYln_OMFy6ckvhuRPr6KkACpdUsfm4NsTq1ddoOYxd9RTEfydGwkcDX8GuyAaGtYIm_z6sHUjynycvlhuCbZnNV30Fg9Yp4JidXKK5sIkWQ&licenseId=LIC4639&projectName=Project-03";
+
+# Use 'desired_capabilities' here
+driver = webdriver.Remote(command_executor=device_farm_hub_url, options=options)
+
+
+
+
+
+
+
+
+
+options = UiAutomator2Options()
+options.device_name = "OnePlus Nord CE 2 Lite 5G"
+options.platform_name = "Android"
+options.platform_version = "14"
+options.app = "General-Store-final (1).apk"
+options.automation_name = "UiAutomator2"
+device_farm_hub_url = "https://fireflinkclouddev.fireflink.com/backend/fireflinkcloud/wd/hub?accessKey=xnZJRvKL6F26IuCM3K3pe-oSuykml-D0u6GrTaLLwdaPk9OS80lI6mGP2fYdYGwVuP5kaDO_zcElBor3m_lh2fgDWT7n0MBXfWZ6PBZyKaIdbyyUv-Fymw7NaySl4XENMPmgOpt2z-gR0RrH0gZvuV2JukC_19mVB3sawJ__i-AibN9y9Ae4QmD3P4qcDqbRYln_OMFy6ckvhuRPr6KkACpdUsfm4NsTq1ddoOYxd9RTEfydGwkcDX8GuyAaGtYIm_z6sHUjynycvlhuCbZnNV30Fg9Yp4JidXKK5sIkWQ&licenseId=LIC4639&projectName=Project-03";
+
+# Use 'desired_capabilities' here
+driver = webdriver.Remote(command_executor=device_farm_hub_url, options=options)
+
+wait = WebDriverWait(driver, 20)
+
